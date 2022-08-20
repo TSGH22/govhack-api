@@ -1,7 +1,9 @@
 namespace GovHack22API.Controllers;
 
 using GovHack22API.Domain;
+using GovHack22API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("[controller]")]
@@ -12,25 +14,20 @@ public class PropertyController : ControllerBase
     public PropertyController(PropertyContext dbContext)
     {
         _dbContext = dbContext;
+    
     }
 
-    // [HttpGet(Name = "GetWeatherForecast")]
-    // public IEnumerable<WeatherForecast> Get()
-    // {
-    //     return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-    //     {
-    //         Date = DateTime.Now.AddDays(index),
-    //         TemperatureC = Random.Shared.Next(-20, 55),
-    //         Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-    //     })
-    //     .ToArray();
-    // }
-
-    // [HttpPost(Name = "CreatePropertyPost")]
-    // public IHttpActionResult Get()
-    // {
-
-    //      return Ok();
-    // }
-
+    [HttpGet(Name = "Test")]
+    public Property Get()
+    {
+       return  _dbContext.Properties
+            .Include(x => x.Images)
+            .Include(x => x.FloorPlan)
+            .Include(x => x.Facilities)
+            .Include(x => x.Owner)
+            .Include(x => x.Location)
+            .Include(x => x.Spaces)
+            .ThenInclude(x => x.Availability)
+                .FirstOrDefault();
+    }
 }
