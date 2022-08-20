@@ -1,0 +1,11 @@
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/GovHack22API
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/appsettings.Development.json
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/appsettings.json
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/GovHack22API.dll
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/GovHack22API.deps.json
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/GovHack22API.runtimeconfig.json
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/GovHack22API.pdb
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/Microsoft.OpenApi.dll
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/Swashbuckle.AspNetCore.Swagger.dll
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/damian/Projects/GovHack22API/bin/Release/net6.0/publish/Swashbuckle.AspNetCore.SwaggerUI.dll
