@@ -3,11 +3,11 @@ namespace GovHack22API.Models {
     using GovHack22API.Models.Enums;
 
 public class Property {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public string[] Images { get; set; }
+        public List<Image> Images { get; set; }
 
-        public string FloorPlan { get; set; }
+        public Image FloorPlan { get; set; }
 
         public string Description { get; set; }
 
@@ -23,7 +23,7 @@ public class Property {
 
         public DressCodeEnum DressCode { get; set; }
 
-        public Space[] Spaces { get; set; }
+        public List<Space> Spaces { get; set; }
 
         public float Price { get; set; }
     }

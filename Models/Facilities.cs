@@ -1,6 +1,7 @@
 namespace GovHack22API.Models {
 
 public class Facilities {
+        public int Id { get; set; }
         
         public bool Lift { get; set; }
         

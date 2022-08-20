@@ -11,6 +11,6 @@ public class Space {
 
         public float DailyPrice { get; set; }
 
-        public Availability Availability { get; set; }
+        public List<Availability> Availability { get; set; }
     }
 }

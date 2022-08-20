@@ -1,16 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace GovHack22API.Controllers;
+
+using GovHack22API.Domain;
+using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
 public class PropertyController : ControllerBase
 {
-    
+    private readonly PropertyContext _dbContext;
 
-    public PropertyController()
+    public PropertyController(PropertyContext dbContext)
     {
-        
+        _dbContext = dbContext;
     }
 
     // [HttpGet(Name = "GetWeatherForecast")]
@@ -23,6 +24,13 @@ public class PropertyController : ControllerBase
     //         Summary = Summaries[Random.Shared.Next(Summaries.Length)]
     //     })
     //     .ToArray();
+    // }
+
+    // [HttpPost(Name = "CreatePropertyPost")]
+    // public IHttpActionResult Get()
+    // {
+
+    //      return Ok();
     // }
 
 }
