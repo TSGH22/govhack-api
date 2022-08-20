@@ -17,8 +17,8 @@ public class PropertyController : ControllerBase
     
     }
 
-    [HttpGet(Name = "Test")]
-    public Property Get()
+    [HttpGet("featured")]
+    public List<Property> Get()
     {
        return  _dbContext.Properties
             .Include(x => x.Images)
@@ -27,7 +27,16 @@ public class PropertyController : ControllerBase
             .Include(x => x.Owner)
             .Include(x => x.Location)
             .Include(x => x.Spaces)
-            .ThenInclude(x => x.Availability)
-                .FirstOrDefault();
+                .ThenInclude(x => x.Availability)
+            .ToList();
+    }
+
+    [HttpPost("book")]
+    public string Post([FromBody] Property property)
+    {
+        _dbContext.Properties.Add(property);
+        _dbContext.SaveChanges();
+
+       return "Created";
     }
 }
