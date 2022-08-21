@@ -17,7 +17,6 @@ public class PropertyController : ControllerBase
     {
         _dbContext = dbContext;
         _mapper = new Mapper();
-    
     }
 
     [HttpGet("featured")]

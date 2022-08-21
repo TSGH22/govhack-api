@@ -103,8 +103,9 @@ namespace GovHack22API.Domain {
             availabilities.ForEach(a => 
                 response.Add(
                     new AvailabilityResponse {
-                        StartDate = a.StartDate,
-                        EndDate = a.EndDate}) 
+                            StartDate = ConvertToUnixTime(a.StartDate),
+                            EndDate = ConvertToUnixTime(a.EndDate)
+                        }) 
             ); 
 
             return response;
@@ -125,6 +126,12 @@ namespace GovHack22API.Domain {
             );
 
             return response;
-         }
+        }
+
+        private long ConvertToUnixTime(DateTime date)
+        {
+            var timeSpan = (date - new DateTime(1970, 1, 1, 0, 0, 0));
+            return (long)timeSpan.TotalSeconds;
+        }
     }
 }
