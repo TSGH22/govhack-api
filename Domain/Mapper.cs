@@ -17,7 +17,10 @@ namespace GovHack22API.Domain {
                 Images = MapImageURIs(property.Images),
                 Facilities = MapFacilities(property.Facilities),
                 Owner = MapOwner(property.Owner),
-                Spaces = MapSpaceResponse(property.Spaces)
+                Spaces = MapSpaceResponse(property.Spaces),
+                SpaceRating = RandomSpaceRating(),
+                Price = property.Price,
+                Location = MapLoction(property.Location)
             };
         }
 
@@ -132,6 +135,17 @@ namespace GovHack22API.Domain {
         {
             var timeSpan = (date - new DateTime(1970, 1, 1, 0, 0, 0));
             return (long)timeSpan.TotalSeconds;
+        }
+
+        private SpaceRating RandomSpaceRating() {
+            Random rnd = new Random(); 
+
+            return new SpaceRating() {
+             Cleanliness = rnd.Next(1, 5),
+             NoiseLevel = rnd.Next(1, 5),
+             Facilities = rnd.Next(1, 5),
+            };
+
         }
     }
 }

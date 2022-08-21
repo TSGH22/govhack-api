@@ -23,6 +23,8 @@ public class PropertyResponse {
 
         public string DressCode { get; set; }
 
+        public SpaceRating SpaceRating { get; set; }
+
         public IEnumerable<SpaceResponse> Spaces { get; set; }
 
         public float Price { get; set; }

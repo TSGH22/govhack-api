@@ -1,9 +1,9 @@
 namespace GovHack22API.Models.Response {
 
 public class LocationResponse {
-        public float Latitude { get; set; }
+        public double Latitude { get; set; }
 
-        public float Longitude { get; set; }
+        public double Longitude { get; set; }
 
         public string Suburb { get; set; }
 

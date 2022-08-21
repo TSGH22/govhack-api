@@ -2,6 +2,7 @@ namespace GovHack22API.Controllers;
 
 using GovHack22API.Domain;
 using GovHack22API.Models;
+using GovHack22API.Models.Request;
 using GovHack22API.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,13 @@ public class PropertyController : ControllerBase
 {
     private readonly PropertyContext _dbContext;
     private  Mapper _mapper; 
+    private Random _random;
 
     public PropertyController(PropertyContext dbContext)
     {
         _dbContext = dbContext;
         _mapper = new Mapper();
+        _random = new Random();
     }
 
     [HttpGet("featured")]
@@ -41,19 +44,10 @@ public class PropertyController : ControllerBase
         return response;
     }
 
-    [HttpPost("book")]
-    public string Post([FromBody] Property property)
+    [HttpGet("search")]
+    public IList<PropertyResponse> Search([FromBody] SearchRequest search)  
     {
-        _dbContext.Properties.Add(property);
-        _dbContext.SaveChanges();
-
-       return "Created";
-    }
-
-    [HttpGet("test")]
-    public Property Test()
-    {
-       var x =  _dbContext.Properties
+        var properties = _dbContext.Properties
             .Include(x => x.Images)
             .Include(x => x.FloorPlan)
             .Include(x => x.Facilities)
@@ -61,8 +55,31 @@ public class PropertyController : ControllerBase
             .Include(x => x.Location)
             .Include(x => x.Spaces)
                 .ThenInclude(x => x.Availability)
-            .FirstOrDefault();
-        
-        return x;
+            .ToList();
+            
+        var response = new List<PropertyResponse>();
+
+        if (search.MaxPrice != 0){
+            response = response.Where(r => r.Price > search.MaxPrice)
+                .ToList();
+        }
+
+        properties.ForEach(p => response.Add(
+            _mapper.MapPropertyResponse(p)
+        ));
+
+        return response;
+    }
+
+    [HttpPost("book")]
+    public string Post([FromBody] Property property)
+    {
+        property.Location.Latitude = Convert.ToDouble("-33" + _random.Next(868563, 898204));
+        property.Location.Longitude = Convert.ToDouble("151" + _random.Next(179171, 242557));
+
+        _dbContext.Properties.Add(property);
+        _dbContext.SaveChanges();
+
+       return "Created";
     }
 }
