@@ -14,12 +14,14 @@ public class PropertyController : ControllerBase
     private readonly PropertyContext _dbContext;
     private  Mapper _mapper; 
     private Random _random;
+    //private LocationSearchHelper _locationSearchHelper;
 
     public PropertyController(PropertyContext dbContext)
     {
         _dbContext = dbContext;
         _mapper = new Mapper();
         _random = new Random();
+       // _locationSearchHelper = new LocationSearchHelper();
     }
 
     [HttpGet("featured")]
@@ -44,7 +46,7 @@ public class PropertyController : ControllerBase
         return response;
     }
 
-    [HttpGet("search")]
+    [HttpPost("search")]
     public IList<PropertyResponse> Search([FromBody] SearchRequest search)  
     {
         var properties = _dbContext.Properties
@@ -64,6 +66,10 @@ public class PropertyController : ControllerBase
                 .ToList();
         }
 
+        if(search.Latitude > 0 && search.Longitude > 0 && search.Radius > 0) {
+            response = response;
+        }
+
         properties.ForEach(p => response.Add(
             _mapper.MapPropertyResponse(p)
         ));
@@ -74,8 +80,8 @@ public class PropertyController : ControllerBase
     [HttpPost("book")]
     public string Post([FromBody] Property property)
     {
-        property.Location.Latitude = Convert.ToDouble("-33" + _random.Next(868563, 898204));
-        property.Location.Longitude = Convert.ToDouble("151" + _random.Next(179171, 242557));
+        property.Location.Latitude = Convert.ToDouble("-33." + _random.Next(868563, 898204));
+        property.Location.Longitude = Convert.ToDouble("151." + _random.Next(179171, 242557));
 
         _dbContext.Properties.Add(property);
         _dbContext.SaveChanges();
